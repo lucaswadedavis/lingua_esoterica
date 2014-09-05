@@ -17,7 +17,7 @@ app.m.colors.grey="#555";
 /////////////////////////////////////////////////////////////////////////////////
 
 app.c.init=function(){
-	app.m.metadata={"name":"Ziph","version":"0.0.1"};
+	app.m.metadata={"name":"Lingua Explorator","version":"0.0.2"};
 };
 
 app.c.listeners=function(){
@@ -111,6 +111,8 @@ app.v.init=function(){
 	$("body").html(d);
 };
 
+//////////////////////////////////////////
+//////////////////////////////////////////
 
 app.v.style=function(){
 	davis.style("body",{
