@@ -35,6 +35,7 @@ $("input#count").click(function(){
 		division=false;
 	}
 	//console.log(division);
+	if (input.length>1000){input.length=1000;}
 	input=app.c.ziph(input,parseInt(count,10),division);
 	
 	var sortable=[];
@@ -135,24 +136,31 @@ app.c.phonemify = function (inspiration) {
 	];
 	var vowels = [
 		'a', 'e', 'i', 'o', 'u', 'y'
+	];	
+	var default_ret = [
+		'sa','so','si','da','do','di'
 	];
+	
+	var v = inspiration.match(new RegExp('(['+ vowels.join('|') + ']+)', 'gi')) || [];
+
+	var psoft = inspiration.match(new RegExp('([' + soft.join('|') + "]+["+ vowels.join('|') + ']+)', 'gi')) || [];
+	var phard = inspiration.match(new RegExp('([' + hard.join('|') + "]+["+ vowels.join('|') + ']+)', 'gi')) || [];
 	var softp = inspiration.match(new RegExp('([' + vowels.join('|') + "]+["+ soft.join('|') + ']+)', 'gi')) || [];
 	var hardp = inspiration.match(new RegExp('([' + vowels.join('|') + "]+["+ hard.join('|') + ']+)', 'gi')) || [];
 	var softsoft = inspiration.match(new RegExp('([' + soft.join('|') + ']+[' + vowels.join('|') + "]+["+ soft.join('|') + ']+)', 'gi')) || [];
 	var softhard = inspiration.match(new RegExp('([' + soft.join('|') + ']+[' + vowels.join('|') + "]+["+ hard.join('|') + ']+)', 'gi')) || [];
 	var hardsoft = inspiration.match(new RegExp('([' + hard.join('|') + ']+[' + vowels.join('|') + "]+["+ soft.join('|') + ']+)', 'gi')) || [];
 	var hardhard = inspiration.match(new RegExp('([' + hard.join('|') + ']+[' + vowels.join('|') + "]+["+ hard.join('|') + ']+)', 'gi')) || [];
-	var default_ret = [
-		'sa','so','si','da','do','di'
-	];
-	
-	var ret = _.uniq([].concat(softp, hardp, softsoft, softhard, hardsoft, hardhard));
+
+	var ret = _.uniq([].concat(v,psoft,phard,softp, hardp, softsoft, softhard, hardsoft, hardhard));
 	
 	if (ret.length < 1) {
-		return default_ret;
+		ret= default_ret;
 	}
 	
-	return ret || default_ret;
+	ret=_.sortBy(ret,function(n){return n.length});
+	console.log(ret);
+	return ret;
 };
 
 
