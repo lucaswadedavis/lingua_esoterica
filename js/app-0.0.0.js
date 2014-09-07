@@ -166,8 +166,8 @@ app.v.LAYOUT=function(){
 var d="";
 	d+="<div id='area-right'>";
 		d+="<h1>"+app.m.metadata.name+"</h1>";
-		d+="<hr>";
-		
+		d+=app.v.exposition();
+		d+="<div id='options'>";
 		d+="<input type='radio' value='1' name='count' checked><label>count by singletons</label></br>";
 		d+="<input type='radio' value='2' name='count'><label>count by doubles</label><br/>";
 		d+="<input type='radio' value='3' name='count'><label>count by triples</label><br>";
@@ -175,18 +175,27 @@ var d="";
 		d+="<hr>";
 		d+="<input type='radio' value='1' name='division' checked><label>count by words</label></br>";
 		d+="<input type='radio' value='0' name='division'><label>count by characters</label><br/>";
-		
+		d+="</div>";
+		d+="<h2>inspirational seed</h2>";
 		d+="<div class='wrapper'>";
-			d+="<h2>inspirational seed</h2>";
 			d+="<input type='text' id='inspiration'></input>";
 		d+="</div>";
 		d+="<h2>text to translate</h2>";
 		d+="<textarea rows='10' cols='5' id='input' autofocus></textarea>";
-		d+="<input type='button' value='count' id='count'></input>";
+		d+="<input type='button' value='translate' id='count'></input>";
 	d+="</div>";
 	d+="<div id='output'>";
 	d+="</div>";
 	$("body").html(d);
+};
+
+app.v.exposition=function(){
+	var d="<p id='exposition'>";
+	d+="a quick way to create a fantasy language: ";
+	d+="just give esoterica a little inspiration, and some text to translate, ";
+	d+="and you'll get a quick english to fantasy-language dictionary.";
+	d+="</p>";
+	return d;
 };
 
 app.v.glossary=function(sortable){
@@ -238,9 +247,9 @@ app.v.style=function(){
 		"width":"100%",
 		"font-size":"0.8em",
 		"font-family":"arial sans-serif",
-		"border":"2px solid "+app.m.colors.grey,
+		"border":"1px solid "+app.m.colors.grey,
 		"margin":"0",
-		"margin-top":"30px"
+		"margin-top":"10px"
 	});
 	davis.style("table",{
 		"width":"100%"
@@ -275,6 +284,12 @@ app.v.style=function(){
 		"padding":"0",
 		"margin":"0",
 		"border":"0"
+	});
+	davis.style("div#options",{
+		"display":"none"	
+	});
+	davis.style("p#exposition",{
+		"font-size":"0.8em"	
 	});
 	davis.style("input[type=text]",{
 		"width":"100%"	
