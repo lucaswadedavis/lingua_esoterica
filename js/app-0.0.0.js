@@ -143,7 +143,7 @@ app.c.phonemify = function (inspiration) {
 	var hardsoft = inspiration.match(new RegExp('([' + hard.join('|') + ']+[' + vowels.join('|') + "]+["+ soft.join('|') + ']+)', 'gi')) || [];
 	var hardhard = inspiration.match(new RegExp('([' + hard.join('|') + ']+[' + vowels.join('|') + "]+["+ hard.join('|') + ']+)', 'gi')) || [];
 	var default_ret = [
-		'glob', 'hop', 'dim', 'mool', 'hap', 'sil', 'gurp', 'lig', 'mun', 'elf', 'woo'
+		'sa','so','si','da','do','di'
 	];
 	
 	var ret = _.uniq([].concat(softp, hardp, softsoft, softhard, hardsoft, hardhard));
@@ -159,8 +159,12 @@ app.c.phonemify = function (inspiration) {
 
 app.v.init=function(){
 	app.v.style();
-	var d="";
-	d+="<table width='100%' id='layout'><tr><td colspan='3' id='area-right'>";
+	app.v.LAYOUT();
+};
+
+app.v.LAYOUT=function(){
+var d="";
+	d+="<div id='area-right'>";
 		d+="<h1>"+app.m.metadata.name+"</h1>";
 		d+="<hr>";
 		
@@ -179,11 +183,11 @@ app.v.init=function(){
 		d+="<h2>text to translate</h2>";
 		d+="<textarea rows='10' cols='5' id='input' autofocus></textarea>";
 		d+="<input type='button' value='count' id='count'></input>";
-	d+="</td><td id='output'>";
-	d+="</td></tr></table>";
+	d+="</div>";
+	d+="<div id='output'>";
+	d+="</div>";
 	$("body").html(d);
 };
-
 
 app.v.glossary=function(sortable){
 	var lex=app.m.lexicon;
@@ -208,7 +212,7 @@ app.v.style=function(){
 		"margin":"0px",
 		"padding":"0px",
 		"color":"#555",
-		"font-size":"3em",
+		"font-size":"1em",
 		"font-family":"sans-serif"
 	});
 	davis.style("div",{
@@ -218,7 +222,7 @@ app.v.style=function(){
 	});
 	davis.style("h1",{
 		"text-align":"left",
-		"font-size":"7em",
+		"font-size":"2em",
 		"margin-bottom":"30px",
 		"color":app.m.colors.primary
 	});
@@ -251,12 +255,12 @@ app.v.style=function(){
 		"vertical-align":"top",
 		"text-align":"left"
 	});
-	davis.style("td#output",{
+	davis.style("div#output",{
 		"background":app.m.colors.primary,
 		"text-align":"left",
 		"padding":"0"
 	});
-	davis.style("td#output td",{
+	davis.style("div#output td",{
 		"color":"#fff",
 		"padding":"3px",
 		"margin":"0",
