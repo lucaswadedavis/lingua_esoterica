@@ -201,8 +201,10 @@ app.v.exposition=function(){
 app.v.glossary=function(sortable){
 	var lex=app.m.lexicon;
 	var d="";
+	d+="<h2>Translating Dictionary</h2>";
 	d+="<table>";
-	d+="<tr><td colspan='2'>sample length: "+app.m.sampleLength+"</td></tr>";
+	//d+="<tr><td colspan='2'>sample length: "+app.m.sampleLength+"</td></tr>";
+	d+="<tr><th>source</th><th>translation</th></tr>";
 	for (var i=0;i<lex.length;i++){
 		var rowClass="odd";
 		if (i%2==0){rowClass="even";}
@@ -265,11 +267,11 @@ app.v.style=function(){
 		"text-align":"left"
 	});
 	davis.style("div#output",{
-		"background":app.m.colors.primary,
 		"text-align":"left",
 		"padding":"0"
 	});
 	davis.style("div#output td",{
+		"background":app.m.colors.primary,
 		"color":"#fff",
 		"padding":"3px",
 		"margin":"0",
@@ -293,5 +295,11 @@ app.v.style=function(){
 	});
 	davis.style("input[type=text]",{
 		"width":"100%"	
+	});
+	davis.style("th",{
+		"background":"transparent",
+		"border":"0",
+		"font-size":"2em",
+		"text-align":"center"
 	});
 };
